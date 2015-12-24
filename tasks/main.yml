@@ -42,12 +42,14 @@
     src: passenger.j2
     dest: /etc/nginx/sites-available/passenger
   notify: restart nginx
+  when: enable_passenger_virtual_host
 
 - name: Ensure passenger virtual host is enabled.
   file:
     src: /etc/nginx/sites-available/passenger
     dest: /etc/nginx/sites-enabled/passenger
     state: link
+  when: enable_passenger_virtual_host
 
 - name: Ensure default virtual host is removed.
   file:
